@@ -1,40 +1,40 @@
 execute pathogen#infect()
-
 set csprg=/usr/bin/cscope
 call pathogen#helptags()
 
-imap jk <Esc>
-vmap jk <Esc>
+syntax enable
 let mapleader = ","
 map <leader>t :tabnew<cr>
 noremap <leader>w :w! <cr>
 map <leader>q :q! <cr>
 map <leader>f :CtrlP <cr>
 map <leader>n :tn <cr>
-
-
-syntax enable
+map <leader>s :A <cr>
+map <leader>sa :AT <cr>
+imap jk <Esc>
+vmap jk <Esc>
 
 set hidden
 set incsearch
 set magic
 set ruler
+set showmatch
+set mat=0
 set noswapfile
 set showtabline=10
 set hlsearch
 set tabstop=2
+set ignorecase
+set smartcase
 set softtabstop=2 
 set shiftwidth=2 
-set noexpandtab
+set expandtab
 set t_Co=256
 set background=dark
+colorscheme koehler
 set number
 filetype plugin indent on
 set foldmethod=syntax
-set showmatch
-set mat=0
-colorscheme koehler
-
 
 function! CheckOut()
 		    execute "!" ."ct co -nc ". expand('%:p')
@@ -74,4 +74,12 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
 
+let storagedir = system("echo -n `storage`/cscope.out")
+let storagedir2 = system("echo -n `storage`/tags")
+execute "cscope add " . storagedir 
+execute "cscope add ./cscope.out" 
+execute "cscope add ../cscope.out" 
+execute "cscope add ../../cscope.out" 
+execute 'set tags=' . storagedir2 .",./tags,tags"
+execute 'set tags=' . storagedir2 .",./tags,tags;~/tags"
 
