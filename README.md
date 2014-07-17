@@ -1,1 +1,1 @@
-**My .vimrc and plugins**
+#My .vimrc and plugins
