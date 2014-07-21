@@ -1,5 +1,9 @@
+set nocompatible
+
+"Pathogen {{{
 execute pathogen#infect()
 call pathogen#helptags()
+"}}}
 
 "Mappings {{{
   let mapleader = ","
@@ -15,6 +19,10 @@ call pathogen#helptags()
 "}}}
 
 "Generic {{{
+"
+  set number                     "Line Numbers
+  set backspace=indent,eol,start "Backspace in insert mode
+  set showcmd                    "Shows whats going on with current cmd
   syntax enable
   filetype plugin indent on
   set foldmethod=syntax
@@ -36,7 +44,6 @@ call pathogen#helptags()
   set t_Co=256
   "set background=dark
   colorscheme darkmate
-  set number
 "}}}
 
 if $USER == 'smccrear'
