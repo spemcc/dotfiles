@@ -4,7 +4,6 @@ set nocompatible
 execute pathogen#infect()
 call pathogen#helptags()
 "}}}
-
 "Mappings {{{
   let mapleader = ","
   map <leader>t :tabnew<cr>
@@ -17,38 +16,53 @@ call pathogen#helptags()
   imap jk <Esc>
   vmap jk <Esc>
 "}}}
-
-"Generic {{{
-"
+"General {{{
+  set autoread                   "Reloads files changed 
   set number                     "Line Numbers
   set backspace=indent,eol,start "Backspace in insert mode
   set showcmd                    "Shows whats going on with current cmd
-  syntax enable
-  filetype plugin indent on
+  set hidden                     "Allows unsaved buffers to exist
+  set ruler                      "Shows line and character number bottom right of window
+  set showmode                   "Shows current mode bottom of screen
+  syntax on                     
   set foldmethod=syntax
-  set hidden
   set incsearch
   set magic
-  set ruler
-  set showmatch
-  set mat=0
-  set noswapfile
   set showtabline=10
-  set hlsearch
-  set tabstop=2
-  set ignorecase
-  set smartcase
-  set softtabstop=2 
-  set shiftwidth=2 
-  set expandtab
   set t_Co=256
-  "set background=dark
   colorscheme darkmate
-"}}}
 
+  "Indentation {{{
+    filetype plugin indent on
+    set tabstop=2
+    set softtabstop=2 
+    set expandtab
+  "}}}
+  
+  "Swap Files  {{{
+    set noswapfile
+    set nobackup
+    set nowb
+    set shiftwidth=2 
+  "}}}
+ 
+  "Search Settings {{{
+    set hlsearch
+    set showmatch
+    set ignorecase
+    set mat=0
+    set smartcase
+  "}}}
+  "Scrolling {{{
+    set scrolloff=8 
+    set sidescrolloff=15
+    set sidescroll=1
+  "}}}
+
+"}}}
+  "Work Specific {{{
 if $USER == 'smccrear'
   echo "on work pc"
-  "Work Specific {{{
     "ClearCase Functions {{{
       function! CheckOut()
               execute "!" ."ct co -nc ". expand('%:p')
@@ -83,22 +97,40 @@ if $USER == 'smccrear'
       let storagedir = system("echo -n `storage`/cscope.out")
       execute "cscope add " . storagedir 
      "}}}
-   "}}}
-else
-  echo "on home pc"
+     
+    " ctrlp config {{{
+    let g:ctrlp_user_command='cat %s `storage`/cscope.files'
+    " }}}
+    
 endif
-
+   "}}}
+   
 " ctrlp config {{{
   let g:ctrlp_cache_dir = '/home/$USER/ctrlp_cache'
   let g:ctrlp_max_files = 0
-  let g:ctrlp_user_command='cat %s `storage`/cscope.files'
+  "  let g:ctrlp_user_command='cat %s `storage`/cscope.files'
   let g:ctrlp_by_filename = 1
   let g:ctrlp_max_height = 15
   let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': [],
     \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
     \ }
+
+function! PickProject()
+  let PROJS=system('ls -d /home/spencer/Documents/Developer/*/')
+  let PROJ_LIST=split(PROJS)
+  let num=0
+  for proj in PROJ_LIST
+   let num+=1
+   echo  num.'.'  proj
+  endfor
+  call inputsave()
+  let number = input('Enter number: ')
+  call inputrestore()
+  let g:ctrlp_user_command='cat %s ' . PROJ_LIST[number-1].'c_tag_info/filelist.txt'
+  let &tags=PROJ_LIST[number-1] . 'c_tag_info/tags'
+endfunction
+
+  nmap <leader>p :call PickProject()<cr> 
+
 " }}}
-
-
-
