@@ -18,6 +18,7 @@ call pathogen#helptags()
 "}}}
 "General {{{
   set autoread                   "Reloads files changed 
+  set mouse=a                   
   set number                     "Line Numbers
   set backspace=indent,eol,start "Backspace in insert mode
   set showcmd                    "Shows whats going on with current cmd
@@ -62,7 +63,6 @@ call pathogen#helptags()
 "}}}
   "Work Specific {{{
 if $USER == 'smccrear'
-  echo "on work pc"
     "ClearCase Functions {{{
       function! CheckOut()
               execute "!" ."ct co -nc ". expand('%:p')
@@ -99,7 +99,8 @@ if $USER == 'smccrear'
      "}}}
      
     " ctrlp config {{{
-    let g:ctrlp_user_command='cat %s `storage`/cscope.files'
+    let g:ctrlp_user_command='cat %s storage/cscope.files'
+    set tags="`storage`/machmod"
     " }}}
     
 endif
