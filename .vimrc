@@ -10,12 +10,13 @@ call pathogen#helptags()
   noremap <leader>w :w! <cr>
   map <leader>q :q! <cr>
   map <leader>f :CtrlP <cr>
-  map <leader>n :tn <cr>
   map <leader>s :A <cr>
   map <leader>sa :AT <cr>
+  map <leader>n :NERDTree <cr>
   imap jk <Esc>
   vmap jk <Esc>
 "}}}
+
 "General {{{
   set autoread                   "Reloads files changed 
   set mouse=a                   
@@ -135,3 +136,5 @@ endfunction
   nmap <leader>p :call PickProject()<cr> 
 
 " }}}
+
+let NERDTreeDirArrows=0
