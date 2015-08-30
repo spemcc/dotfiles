@@ -4,22 +4,21 @@ set nocompatible
 execute pathogen#infect()
 call pathogen#helptags()
 "}}}
+
 "Mappings {{{
   let mapleader = ","
   map <leader>t :tabnew<cr>
   noremap <leader>w :w! <cr>
   map <leader>q :q! <cr>
-  map <leader>f :CtrlP <cr>
-  map <leader>s :A <cr>
-  map <leader>sa :AT <cr>
-  map <leader>n :NERDTree <cr>
   imap jk <Esc>
   vmap jk <Esc>
+  map j gj
+  map k gk
 "}}}
 
 "General {{{
   set autoread                   "Reloads files changed 
-  set mouse=a                   
+  set mouse=a                    "Set mouse for 'all'
   set number                     "Line Numbers
   set backspace=indent,eol,start "Backspace in insert mode
   set showcmd                    "Shows whats going on with current cmd
@@ -33,12 +32,16 @@ call pathogen#helptags()
   set showtabline=10
   set t_Co=256
   colorscheme darkmate
+  
 
   "Indentation {{{
     filetype plugin indent on
     set tabstop=2
     set softtabstop=2 
-    set expandtab
+    set expandtab "use spaces instead of tabs
+    set ai "Auto indent
+    set si "Smart indent
+    set wrap "wrap lines
   "}}}
   
   "Swap Files  {{{
@@ -52,7 +55,7 @@ call pathogen#helptags()
     set hlsearch
     set showmatch
     set ignorecase
-    set mat=0
+    set mat=2 "tenths of a second to blink when matching brackets
     set smartcase
   "}}}
   "Scrolling {{{
@@ -137,4 +140,3 @@ endfunction
 
 " }}}
 
-let NERDTreeDirArrows=0
