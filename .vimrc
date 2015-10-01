@@ -31,6 +31,7 @@ call pathogen#helptags()
   set magic
   set showtabline=10
   set t_Co=256
+  set cc=80                      "Shows visible line at column 80
   colorscheme darkmate
   
 
@@ -55,7 +56,7 @@ call pathogen#helptags()
     set hlsearch
     set showmatch
     set ignorecase
-    set mat=2 "tenths of a second to blink when matching brackets
+    set mat=0 "tenths of a second to blink when matching brackets
     set smartcase
   "}}}
   "Scrolling {{{
@@ -122,21 +123,23 @@ endif
     \ }
 
 function! PickProject()
-  let PROJS=system('ls -d /home/spencer/Documents/Developer/*/')
-  let PROJ_LIST=split(PROJS)
-  let num=0
-  for proj in PROJ_LIST
-   let num+=1
-   echo  num.'.'  proj
-  endfor
-  call inputsave()
-  let number = input('Enter number: ')
-  call inputrestore()
-  let g:ctrlp_user_command='cat %s ' . PROJ_LIST[number-1].'c_tag_info/filelist.txt'
-  let &tags=PROJ_LIST[number-1] . 'c_tag_info/tags'
+  let PROJS = system('ls -p `pwd`/* | grep -v /')
+  let FILES = split(PROJS)
+  echo PROJS
+  echo FILES
+  "exe "!mkdir ctrlp" 
+  "exe ":e ctrlp/filelist.txt"
+  "exe "put =FILES"
+  "let g:ctrlp_user_command='cat %s ' . system("pwd") . 'ctrlp/filelist.txt'
 endfunction
 
   nmap <leader>p :call PickProject()<cr> 
 
 " }}}
 
+function! CommitPush()
+  call inputsave()
+  let message = input('Enter commit message: ')
+  call inputrestore()
+  execute "!" ."git commit -m \"" . message . "\"& git push origin master"
+endfunction
