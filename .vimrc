@@ -137,9 +137,13 @@ endfunction
 
 " }}}
 
-function! CommitPush()
+" Git Functions {{{j
+function! AddCommitPush()
+  let currentfilename = expand('%:p:t')
   call inputsave()
   let message = input('Enter commit message: ')
   call inputrestore()
+  execute "!" ."git add " . currentfilename 
   execute "!" ."git commit -m \"" . message . "\"& git push origin master"
 endfunction
+"}}}
