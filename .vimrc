@@ -143,7 +143,27 @@ function! AddCommitPush()
   call inputsave()
   let message = input('Enter commit message: ')
   call inputrestore()
-  execute "!" ."git add " . currentfilename 
-  execute "!" ."git commit -m \"" . message . "\"& git push origin master"
+  execute "!" . "git add " . currentfilename 
+  execute "!" . "git commit -m \"" . message  . "\""
+  execute "!" . "git push origin master"
+endfunction
+
+function! Push()
+  execute "!" . "git push origin master"
+endfunction
+
+function! Commit()
+  call inputsave()
+  let message = input('Enter commit message: ')
+  call inputrestore()
+  execute "!" . "git commit -m \"" . message  . "\""
+endfunction
+
+function! CommitPush()
+  call inputsave()
+  let message = input('Enter commit message: ')
+  call inputrestore()
+  execute "!" . "git commit -m \"" . message  . "\""
+  execute "!" . "git push origin master"
 endfunction
 "}}}
