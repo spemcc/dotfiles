@@ -32,9 +32,12 @@ call pathogen#helptags()
   set showtabline=10
   set t_Co=256
   set cc=80                      "Shows visible line at column 80
+  set tw=79
+  set formatoptions+=t
+  set laststatus=2
   colorscheme darkmate
-  
 
+  set omnifunc=syntaxcomplete#Complete
   "Indentation {{{
     filetype plugin indent on
     set tabstop=2
@@ -52,6 +55,15 @@ call pathogen#helptags()
     set shiftwidth=2 
   "}}}
  
+  "Splits {{{
+    set splitbelow
+    set splitright
+    nnoremap <C-J> <C-W><C-J>
+    nnoremap <C-K> <C-W><C-K>
+    nnoremap <C-L> <C-W><C-L>
+    nnoremap <C-H> <C-W><C-H>
+  "}}}
+  
   "Search Settings {{{
     set hlsearch
     set showmatch
