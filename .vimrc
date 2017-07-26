@@ -16,8 +16,7 @@ call pathogen#helptags()
   map k gk
 "}}}
 
-"General {{{
-  set autoread                   "Reloads files changed 
+"General {{{ set autoread                   "Reloads files changed 
   set mouse=a                    "Set mouse for 'all'
   set number                     "Line Numbers
   set backspace=indent,eol,start "Backspace in insert mode
@@ -47,6 +46,11 @@ call pathogen#helptags()
     set si "Smart indent
     set wrap "wrap lines
   "}}}
+  
+  "CamelCaseMotion PLugin {{{
+  call camelcasemotion#CreateMotionMappings('<leader>')
+  "}}}
+ 
   
   "Swap Files  {{{
     set noswapfile
